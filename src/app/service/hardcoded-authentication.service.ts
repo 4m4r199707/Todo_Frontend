@@ -10,4 +10,11 @@ export class HardcodedAuthenticationService {
     if (user === "amar" && password === "amar") return true;
     return false;
   }
+  isUserLogedIn() {
+    let user = sessionStorage.getItem("authenticationUsername");
+    return !(user === null);
+  }
+  logout() {
+    sessionStorage.removeItem("authenticationUsername");
+  }
 }

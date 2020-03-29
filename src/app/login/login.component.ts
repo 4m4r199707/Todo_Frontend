@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     if (
       this.hardcodedAuthentication.authentication(this.username, this.password)
     ) {
+      sessionStorage.setItem("authenticationUsername", this.username);
       this.router.navigate(["welcome", this.username]);
       this.invalid = true;
     }
