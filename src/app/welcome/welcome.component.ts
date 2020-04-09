@@ -10,6 +10,8 @@ import { WelcomeDataService } from "../service/data/welcome-data.service";
 export class WelcomeComponent implements OnInit {
   username: string;
   welomeMessageFromService: string;
+  errorMessage: string;
+
   constructor(
     private route: ActivatedRoute,
     private service: WelcomeDataService
@@ -22,13 +24,18 @@ export class WelcomeComponent implements OnInit {
 
   getWelcomeMessage() {
     // console.log(this.service.executeHellowWorldService());
-    this.service
-      .executeHellowWorldService()
-      .subscribe((response) => this.handleSuccessfulResponse(response));
+    this.service.executeHellowWorldService().subscribe(
+      (response) => this.handleSuccessfulResponse(response),
+      (err) => this.handleErrorResponse(err)
+    );
   }
 
   handleSuccessfulResponse(response) {
     // console.log(response.message);
     this.welomeMessageFromService = response.message;
+  }
+
+  handleErrorResponse(err) {
+    this.errorMessage = err.error.message;
   }
 }
